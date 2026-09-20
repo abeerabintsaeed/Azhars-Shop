@@ -1,0 +1,15 @@
+{
+  "name": "azhars-store",
+  "version": "1.0.0",
+  "description": "AZHARS - leather shoes & accessories online store",
+  "private": true,
+  "main": "server.js",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "start": "node --no-warnings server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2"
+  }
+}

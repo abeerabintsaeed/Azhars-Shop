@@ -1,0 +1,103 @@
+AZHARS ONLINE STORE  -  START HERE
+==================================
+
+This is a complete online shop that runs on YOUR computer (localhost).
+Nobody else can see it yet. To put it online, see DEPLOY-GUIDE.txt.
+
+
+STEP 1 - Install Node.js (one time only)
+----------------------------------------
+Go to https://nodejs.org and download the "LTS" version (24 or newer).
+Install it like any normal program (Next, Next, Finish).
+
+
+STEP 2 - Start the store
+------------------------
+Unzip this folder somewhere easy, e.g. your Desktop, then:
+
+  Windows :  double-click   start.bat
+  Mac     :  double-click   start.command
+             (if Mac says it cannot be opened: right-click it, choose Open, then Open again)
+
+A black window appears. KEEP IT OPEN - it is your store's engine.
+Your browser opens the shop automatically. If it does not, go to:
+
+  Shop  ->  http://localhost:3000
+  Admin ->  http://localhost:3000/#/admin
+
+To stop the store, close the black window.
+
+
+STEP 3 - Log in to the admin panel
+----------------------------------
+  Email    : admin@azhars.pk
+  Password : Admin@12345
+
+Change this password straight away:
+Account (person icon) > Password.
+
+
+WHAT YOU CAN DO IN THE ADMIN PANEL
+----------------------------------
+  Dashboard     Sales, waiting orders, items running low.
+  Orders        Confirm, ship, add tracking, mark payments as received.
+  Products      Add / edit / hide / delete. Each product can have colours and sizes.
+                Tip: "Quick add" makes every colour x size combination at once.
+  Bulk upload   Upload hundreds of products from an Excel sheet:
+                  1. Download the template
+                  2. Fill it in Excel  (one row per size/colour)
+                  3. Save as "CSV (Comma delimited)"
+                  4. Upload it - you get a preview before anything is saved
+  Categories    Group products (Formal, Sneakers, Boots...).
+  Sales         Create seasonal sales (Eid, Summer, Black Friday). Choose the discount,
+                what it applies to, and start/end dates. Prices change by themselves.
+  Coupons       Discount codes customers type in at checkout (WELCOME10 is an example).
+  Customers     People who created accounts.
+  Settings      Store name, top banner, delivery charge, free-delivery amount, and
+                your payment methods.
+
+
+BEFORE YOU SHOW IT TO ANYONE - CHECK THESE
+------------------------------------------
+  * The 16 products, their prices and the illustrated pictures are SAMPLES.
+    Delete them (Products > tick all > Delete) and add your real ones.
+  * Admin > Settings > Payment methods: the bank, JazzCash and Easypaisa
+    account numbers are FAKE placeholders. Put in your real ones.
+  * "Card (test mode)" is a pretend gateway - no real money moves.
+    Switch it off in Settings before real customers use the store.
+  * The sample sale ("Sneaker Season") and coupon (WELCOME10) are examples.
+    Edit or delete them.
+  * The text on the home page (like "Sizes 39 to 45") is placeholder wording.
+  * The store does not send emails yet.
+
+
+ADDING YOUR OWN PRODUCT PHOTOS
+------------------------------
+Easiest: Admin > Products > Add product > "Upload photos".
+For bulk upload: copy your photos into the folder  public/uploads  and write just
+the file name (e.g. kasur-oxford-1.jpg) in the image_urls column. Use | to separate
+several photos.
+
+
+BACKUP
+------
+Everything you create (products, orders, customers) is in the folder  data
+and your uploaded photos are in  public/uploads.
+Copy those two folders somewhere safe regularly.
+To start again from scratch, stop the store and delete the file  data/azhars.db
+
+
+IF SOMETHING GOES WRONG
+-----------------------
+  "Port 3000 is already in use"  The store is probably already open in another
+      black window. Close the extra one.
+  "Node.js is too old / not installed"  Redo Step 1.
+  Page says it cannot reach the server  The black window was closed. Start it again.
+
+
+WHAT IS NOT INCLUDED YET
+------------------------
+  * Real online card payments (needs a merchant account with a payment provider;
+    it can be added once you have one).
+  * Emails / SMS to customers.
+  * Going live on a domain (next step - it needs hosting, HTTPS and a real payment gateway).

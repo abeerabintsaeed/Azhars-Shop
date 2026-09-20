@@ -1,0 +1,123 @@
+AZHARS - PUTTING THE STORE ONLINE (GitHub + Railway)
+====================================================
+
+What you will end up with: a real web address (like https://azhars-store.up.railway.app)
+that works in any browser AND can be installed like an app on Windows, Mac, Android and iPhone.
+
+Two free-to-open accounts are needed: GitHub (stores your files) and Railway (runs the store).
+Railway is not free after its trial (see PART 0). Plan for about 60-90 minutes the first time.
+
+
+PART 0 - READ THIS FIRST
+------------------------
+* Railway: new accounts get a one-time trial credit (about $5, for up to 30 days). After that the
+  "Hobby" plan is about $5 USD per month. Check the current price at railway.com/pricing.
+* Your products, orders and customers live in a "Volume" (a permanent disk) that you attach in Part 3.
+  WITHOUT the Volume everything is erased each time the store restarts. Do not skip it.
+* The store does NOT send emails or SMS yet. You will not be told when an order arrives, so you
+  must check Admin > Orders yourself (the installed app makes this easy).
+* Card payments are not live yet. Online, only Cash on Delivery is switched on at first; you can
+  switch on Bank / JazzCash / Easypaisa in Admin > Settings after typing your REAL account details.
+* There are no Terms, Privacy or Returns pages yet.
+
+
+PART 1 - GITHUB (about 15 minutes)
+----------------------------------
+1. Go to github.com and click Sign up. Create the account and confirm your email.
+2. Top right, click the "+" icon, then "New repository".
+3. Repository name: azhars-store     Choose PRIVATE.
+   Do NOT tick "Add a README". Click "Create repository".
+4. On the empty page, click the link "uploading an existing file".
+5. On your computer: unzip azhars-store-online.zip. Open the folder called azhars.
+   Press Ctrl+A (Cmd+A on Mac) to select EVERYTHING INSIDE it, then DRAG it all onto the GitHub page.
+   (Drag the contents, NOT the azhars folder itself.)
+6. Wait until every file finishes uploading. Scroll down, click "Commit changes".
+7. CHECK: the repository's front page must show server.js and package.json directly in the list,
+   plus a "public" folder. If you only see one folder called "azhars", you dragged the wrong thing:
+   delete the repository (Settings, bottom) and redo steps 2-6.
+
+
+PART 2 - RAILWAY: CREATE THE STORE (about 15 minutes)
+-----------------------------------------------------
+1. Go to railway.com and click Login. Choose "Login with GitHub" and allow it.
+2. Click "New Project", then "Deploy from GitHub repo".
+3. If asked, let Railway access GitHub. Choose "Only select repositories" and pick azhars-store.
+4. Railway starts building. It will probably show "Crashed" or "Failed" after a minute.
+   THIS IS EXPECTED - it is waiting for the settings you add next.
+5. Click the azhars-store box, then the "Variables" tab. Add these (click "New Variable" for each):
+
+     ADMIN_EMAIL           your email address (this is your admin login)
+     ADMIN_PASSWORD        a long password, at least 10 characters. Write it down somewhere safe.
+     RAILPACK_NODE_VERSION 24
+
+   Every time you add variables Railway rebuilds. That is normal.
+
+
+PART 3 - RAILWAY: PERMANENT STORAGE (5 minutes) - DO NOT SKIP
+--------------------------------------------------------------
+1. Go back to the project view (the canvas showing your azhars-store box).
+2. Right-click an empty part of the canvas and choose "Volume"
+   (or press Ctrl+K / Cmd+K, type "volume", and choose it).
+3. When asked which service, choose azhars-store.
+4. For the mount path type exactly:   /data
+5. Wait for it to redeploy.
+
+
+PART 4 - RAILWAY: GET YOUR WEB ADDRESS (3 minutes)
+--------------------------------------------------
+1. Click the azhars-store box, then "Settings", then find "Networking".
+2. Click "Generate Domain". If it asks which port, leave the suggested one or the default.
+3. You get an address like https://azhars-store-production.up.railway.app.
+4. In the "Deployments" tab wait for a green "Active"/"Deployed" status.
+   Click "View logs" - you should see  "AZHARS store is running"  and  "Online mode".
+5. Open your address in a browser. Your store is online.
+
+
+PART 5 - FIRST LOGIN AND SET-UP (20 minutes)
+--------------------------------------------
+1. Open   YOUR-ADDRESS/#/admin   and log in with the ADMIN_EMAIL and ADMIN_PASSWORD from Part 2.
+2. The Dashboard must NOT show a red "Your data is not being saved permanently" box.
+   If it does, Part 3 was not done correctly.
+3. Admin > Settings: fill in your real store name, contact email/phone, address, delivery charge.
+   Under Payment methods, type your real account details, then tick the ones you want. Save.
+4. Admin > Products > Add product: add a real product (photo, price, colours and sizes).
+   Or use Bulk upload for many at once.
+5. Test like a customer: open your address in a private/incognito window, add the product to the bag,
+   place an order with Cash on Delivery. Then in Admin > Orders open it and set it to Cancelled.
+6. Admin > Settings > Download backup: do this now, and again every week.
+
+
+PART 6 - INSTALL IT AS AN APP
+-----------------------------
+Open your web address on the device, then:
+  iPhone / iPad : use SAFARI. Tap the Share button (square with arrow), then "Add to Home Screen", then Add.
+  Android       : use CHROME. Tap the three dots, then "Install app" (or "Add to Home screen").
+  Windows / Mac : use CHROME or EDGE. Click the install icon at the right end of the address bar.
+  Or on any device: scroll to the bottom of the store and tap "Install the app" for the same steps.
+The app icon (a green circle with an A) appears with your other apps.
+This is not an App Store / Play Store listing; customers install it straight from your web address.
+
+
+CHANGING THINGS LATER
+---------------------
+* Change the store's design or code: in GitHub open your repository, click "Add file",
+  "Upload files", drop the changed files, "Commit changes". Railway updates the store by itself.
+  Your products, orders and customers are safe on the Volume.
+* Change your own admin password: sign in, click the person icon, Password.
+* Forgot the admin password: in Railway Variables set ADMIN_PASSWORD to a new one AND add
+  ADMIN_RESET = true. After the store restarts, log in with the new password, then DELETE ADMIN_RESET
+  (if you leave it, every restart puts that password back).
+* Your own domain (like azhars.pk): Railway service > Settings > Networking > Custom Domain.
+  You buy the domain from a registrar; Railway shows you the records to enter there.
+
+
+IF SOMETHING GOES WRONG
+-----------------------
+* Deployment shows a red "Crashed" after all variables are added:
+  open the Deployments tab, click "View logs", read the last lines, and send them to me.
+  The two common causes: ADMIN_EMAIL / ADMIN_PASSWORD missing (password needs 10+ characters), or
+  the wrong Node version. For the second, check the variable RAILPACK_NODE_VERSION is set to 24.
+* Red box on the Dashboard about data not saved: the Volume is missing or its path is not /data.
+* Page loads but pictures are broken after an update: pictures live on the Volume; check it is still attached.
+* Railway screens sometimes change names. If a button is not where this guide says, take a screenshot and
+  send it to me.
